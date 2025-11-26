@@ -3,6 +3,7 @@ title: JPA N+1 문제, 원인 분석부터 QueryDSL 활용까지 완벽 정리
 date: 2024-05-20 12:00:00 +0900
 categories: [Backend, JPA]
 tags: [optimization, querydsl, database, performance]
+math: true
 ---
 
 ## 1. 배경 (Background)
