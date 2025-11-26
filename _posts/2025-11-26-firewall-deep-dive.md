@@ -4,6 +4,7 @@ date: 2024-05-26 10:00:00 +0900
 categories: [Infrastructure, Network]
 tags: [tcp-ip, firewall, security, log4j, engineering]
 math: true
+mermaid: true
 ---
 
 ## 1. 배경 (Situation)
@@ -53,7 +54,34 @@ math: true
 
 
 
-[Image of TCP 3-way handshake diagram]
+```mermaid
+sequenceDiagram
+    participant Client as 내 서버 (Client)
+    participant Firewall as 방화벽 (Stateful FW)
+    participant Server as 외부 API (Server)
+
+    Note over Client, Server: 1. TCP 3-Way Handshake (Outbound)
+
+    Client->>Firewall: SYN (Seq=0)
+    Note right of Client: 접속 요청 (Outbound)
+    
+    Firewall->>Firewall: 세션 테이블 기록 (New Session)
+    Firewall->>Server: SYN (Seq=0)
+
+    Server->>Firewall: SYN, ACK (Seq=0, Ack=1)
+    Note left of Server: 응답 (Inbound)
+
+    Firewall->>Firewall: 세션 테이블 확인 (Established)
+    Note right of Firewall: "아까 걔네? 통과!"
+    Firewall->>Client: SYN, ACK (Seq=0, Ack=1)
+
+    Client->>Firewall: ACK (Seq=1, Ack=1)
+    Firewall->>Server: ACK (Seq=1, Ack=1)
+
+    Note over Client, Server: 2. 데이터 전송 (Data Transfer)
+    Client->>Server: HTTP POST /v1/payment
+    Server-->>Client: HTTP 200 OK
+```
 
 
 ### 3.3. NAT (Network Address Translation)의 마법
