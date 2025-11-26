@@ -1,6 +1,6 @@
 ---
 title: 단순히 방화벽만 열면 끝일까? API 연동 시 네트워크 레벨에서 일어나는 일들 (feat. Log4j)
-date: 2024-05-26 10:00:00 +0900
+date: 2025-11-26 10:00:00 +0900
 categories: [Infrastructure, Network]
 tags: [tcp-ip, firewall, security, log4j, engineering]
 math: true
