@@ -1,6 +1,6 @@
 ---
 title: "[Special Report] 2025 통신 3사 해킹과 USIM 사태 - 왜 비극은 반복되며, 피해는 오롯이 이용자의 몫인가?"
-date: 2024-11-26 22:00:00 +0900
+date: 2025-11-26 22:00:00 +0900
 categories: [Security, Tech-Society]
 tags: [apt, bpfdoor, zero-trust, legacy-system, moral-hazard, governance]
 math: true
