@@ -1,6 +1,6 @@
 ---
 title: "[Tech Deep Dive] BPFDoor 분석 - 방화벽을 무력화하는 리눅스 커널 레벨의 백도어"
-date: 2025-12-02 10:00:00 +0900
+date: 2025-12-01 10:00:00 +0900
 categories: [Security, Malware-Analysis]
 tags: [bpfdoor, ebpf, linux-kernel, raw-socket, incident-response, forensics]
 math: true
