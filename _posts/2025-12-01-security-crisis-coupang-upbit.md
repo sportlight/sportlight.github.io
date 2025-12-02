@@ -62,22 +62,24 @@ $$ \text{Risk}_{HotWallet} \propto \frac{\text{Connectivity} \times \text{Asset 
 
 ```mermaid
 flowchart TD
-    subgraph Vulnerable_HotWallet [취약한 핫월렛 구조]
-        Server[온라인 서버] -- 직접 서명 --> PK(단일 개인키)
-        PK -.->|탈취 가능| Lazarus[라자루스 그룹]
+    %% 취약한 구조
+    subgraph Vulnerable ["취약한 핫월렛 구조"]
+        Server["온라인 서버"] -- "직접 서명" --> PK("단일 개인키")
+        PK -.- |"탈취 가능"| Lazarus["라자루스 그룹"]
         style PK fill:#ffcccc,stroke:#ff0000
     end
 
-    subgraph Secure_MPC [MPC 기반 월렛 구조]
-        App[출금 요청] --> Share1[Key Share A]
-        App --> Share2[Key Share B]
-        App --> Share3[Key Share C]
+    %% 안전한 구조
+    subgraph Secure ["MPC 기반 월렛 구조"]
+        App["출금 요청"] --> Share1["Key Share A"]
+        App --> Share2["Key Share B"]
+        App --> Share3["Key Share C"]
         
-        Share1 --> Join((프로토콜 연산))
+        Share1 --> Join(("프로토콜 연산"))
         Share2 --> Join
         Share3 --> Join
         
-        Join --> Signature[완전한 서명 생성]
+        Join --> Signature["완전한 서명 생성"]
         
         style Share2 fill:#bbf
         style Share3 fill:#bfb
