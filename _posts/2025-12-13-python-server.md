@@ -33,15 +33,15 @@ flowchart LR
     
     subgraph On_Premise_Server
         direction TB
-        API -->|1. Query Embedding| Embed[Local Embedding Model]
-        Embed -->|2. Similarity Search| VDB[(Chroma Vector DB)]
-        VDB -->|3. Retrieve Context| API
+        API -->|"1. Query Embedding"| Embed["Local Embedding Model"]
+        Embed -->|"2. Similarity Search"| VDB[("Chroma Vector DB")]
+        VDB -->|"3. Retrieve Context"| API
         
-        API -->|4. Prompt + Context| LLM[Local LLM (Llama-3)]
-        LLM -->|5. Generate Answer| API
+        API -->|"4. Prompt + Context"| LLM["Local LLM (Llama-3)"]
+        LLM -->|"5. Generate Answer"| API
     end
     
-    API -->|6. JSON Response| User
+    API -->|"6. JSON Response"| User
 ```
 
 ---
