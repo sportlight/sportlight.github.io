@@ -1,6 +1,6 @@
 ---
 title: "[Flutter] 뉴스 앱 개발기 - REST API 시대에 왜 다시 RSS인가? 기술적 분석과 전망"
-date: 2025-12-30 11:00:00 +0900
+date: 2025-12-30 10:00:00 +0900
 categories: [Mobile-App, Architecture]
 tags: [flutter, rss, xml, system-design, tech-trend, data-aggregation]
 mermaid: true
